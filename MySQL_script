@@ -1,40 +1,45 @@
 SELECT
-	facility_name,
+    facility_name,
     'Total Move ins' AS variable,
     SUM(CASE WHEN MONTH(move_in) = 4 THEN 1 ELSE 0 END) AS 'April',
     SUM(CASE WHEN MONTH(move_in) = 5 THEN 1 ELSE 0 END) AS 'May',
     SUM(CASE WHEN MONTH(move_in) = 6 THEN 1 ELSE 0 END) AS 'June',
     SUM(CASE WHEN MONTH(move_in) = 7 THEN 1 ELSE 0 END) AS 'July'
 FROM 
-	move_in_activity
-GROUP BY facility_name
+    move_in_activity
+GROUP BY 
+    facility_name
 
 UNION ALL
 
 SELECT 
-	facility_name,
+    facility_name,
     'Promo move ins' AS variable,
     SUM(CASE WHEN MONTH(move_in) = 4 THEN 1 ELSE 0 END) AS 'April',
     SUM(CASE WHEN MONTH(move_in) = 5 THEN 1 ELSE 0 END) AS 'May',
     SUM(CASE WHEN MONTH(move_in) = 6 THEN 1 ELSE 0 END) AS 'June',
     SUM(CASE WHEN MONTH(move_in) = 7 THEN 1 ELSE 0 END) AS 'July'
 FROM
-	move_in_activity
-WHERE promo IS NOT NULL
-GROUP BY facility_name
+    move_in_activity
+WHERE 
+    promo IS NOT NULL
+GROUP BY 
+    facility_name
 
 UNION ALL
 
 SELECT 
-	facility_name,
+    facility_name,
     'Sum of Revenue' AS variable,
     SUM(CASE WHEN MONTH(move_in) = 4 THEN rental_rate ELSE 0 END) AS 'April',
     SUM(CASE WHEN MONTH(move_in) = 5 THEN rental_rate ELSE 0 END) AS 'May',
     SUM(CASE WHEN MONTH(move_in) = 6 THEN rental_rate ELSE 0 END) AS 'June',
     SUM(CASE WHEN MONTH(move_in) = 7 THEN rental_rate ELSE 0 END) AS 'july'
 FROM
-	move_in_activity
-GROUP BY facility_name
-ORDER BY facility_name
+    move_in_activity
+GROUP BY 
+    facility_name
+ORDER BY 
+    facility_name
     
     
